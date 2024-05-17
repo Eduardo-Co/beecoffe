@@ -18,7 +18,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {  
-            return redirect()->intended('medicos.dashboard');
+            return redirect()->intended('/dashboard/medicos');
         }
 
         return back()->withErrors(['email' => 'Credenciais inválidas']);
