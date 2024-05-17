@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Asa-Gerência</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
@@ -31,6 +31,9 @@
   @media screen and (min-width: 768px) {
         img{
           margin-right: 100px;
+        }
+        .loggout{
+            margin-right: 50px
         }
   }
 
@@ -71,6 +74,17 @@
                 </div>
             </li>
         </ul>
+        
+    </div>
+    <div class="navbar-nav loggout">
+        <li class="nav-item dropdown nav-link-main">
+            <a class="nav-link nav-link-main dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Olá,{{auth()->user()->name}}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownUser">
+                <a class="dropdown-item " href="{{route('logout')}}">Sair</a> 
+            </div>
+        </li>
     </div>
   </nav>
    @yield('content')
@@ -83,3 +97,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </html>
+
+
