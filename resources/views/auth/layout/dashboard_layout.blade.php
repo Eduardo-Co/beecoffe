@@ -32,6 +32,9 @@
         img{
           margin-right: 100px;
         }
+        .loggout{
+            margin-right: 50px
+        }
   }
 
 </style>
@@ -71,6 +74,17 @@
                 </div>
             </li>
         </ul>
+        
+    </div>
+    <div class="navbar-nav loggout">
+        <li class="nav-item dropdown nav-link-main">
+            <a class="nav-link nav-link-main dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Olá,{{auth()->user()->name}}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownUser">
+                <a class="dropdown-item " href="{{route('logout')}}">Sair</a> 
+            </div>
+        </li>
     </div>
   </nav>
    @yield('content')
@@ -83,3 +97,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </html>
+
+
