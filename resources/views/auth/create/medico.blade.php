@@ -8,7 +8,7 @@
                 <div class="card-header">Adicionar Novo Médico</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('medicos.store') }}">
+                    <form method="POST" action="{{ route('medicos.store') }}" onsubmit="return validarCRM()">
                         @csrf
 
                         <div class="form-group">
@@ -19,6 +19,7 @@
                         <div class="form-group">
                             <label for="crm">CRM:</label>
                             <input type="text" class="form-control" id="crm" name="crm" required>
+                            <small class="text-muted">Formato esperado: CRM/SP 123456</small>
                         </div>
 
                         <div class="form-group">
@@ -38,4 +39,17 @@
         margin-top: 10px;
     }
 </style>
+
+<script>
+    function validarCRM() {
+        var crmInput = document.getElementById('crm').value;
+        var regex = /^CRM\/[A-Za-z]{2} \d{6}$/;
+
+        if (!regex.test(crmInput)) {
+            alert('O CRM deve seguir o formato "CRM/SP 123456".');
+            return false;
+        }
+        return true;
+    }
+</script>
 @endsection
