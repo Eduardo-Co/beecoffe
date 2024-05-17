@@ -55,12 +55,24 @@ class MedicoController extends Controller
     }
     public function destroy($id)
     {
-        $medico = Medico::findOrFail($id);
-        $medico->delete();
+        try {
+            $medico = Medico::findOrFail($id);
+            $medico->delete();
 
-        return redirect()->route('medicos.dashboard')
-        ->with('success', 'Médico excluído com sucesso.');
+            return redirect()->route('medicos.dashboard')
+                            ->with('success', 'Médico excluído com sucesso.');
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1451) {
+                return redirect()->route('medicos.dashboard')
+                                ->with('error', 'Não é possível excluir este médico porque ele está associado a atendimentos.');
+            } else {
+                return redirect()->route('medicos.dashboard')
+                                ->with('error', 'Ocorreu um erro ao excluir o médico. Por favor, tente novamente mais tarde.');
+            }
+        }
     }
+
     public function edit($id)
     {
         $medico = Medico::findOrFail($id);

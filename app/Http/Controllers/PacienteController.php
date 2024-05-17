@@ -57,11 +57,22 @@ class PacienteController extends Controller
 
     public function destroy($id)
     {
-        $paciente = Paciente::findOrFail($id);
-        $paciente->delete();
+        try {
+            $paciente = Paciente::findOrFail($id);
+            $paciente->delete();
 
-        return redirect()->route('pacientes.dashboard')
-        ->with('success', 'Paciente excluído com sucesso.');
+            return redirect()->route('pacientes.dashboard')
+                             ->with('success', 'Paciente excluído com sucesso.');
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1451) {
+                return redirect()->route('pacientes.dashboard')
+                                 ->with('error', 'Não é possível excluir este paciente porque ele está associado a atendimentos.');
+            } else {
+                return redirect()->route('pacientes.dashboard')
+                                 ->with('error', 'Ocorreu um erro ao excluir o paciente. Por favor, tente novamente mais tarde.');
+            }
+        }
     }
     public function edit($id)
     {
